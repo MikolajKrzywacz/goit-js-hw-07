@@ -24,25 +24,19 @@ galleryPhotos.forEach((el) => {
 
 gallery.addEventListener("click", onImageClick);
 
-function onImageClick(evt) {
-  preventDefaultAction(evt);
-
-  if (evt.target.nodeName !== "IMG") {
+function onImageClick(e) {
+  e.preventDefault();
+  if (e.target.nodeName !== "IMG") {
     return;
   }
-
   const instance = basicLightbox.create(
-    `<img src ="${evt.target.dataset.source}" width= 800 height = 600>`
+    `<img src='${e.target.dataset.source}' width= 800 height = 600>`
   );
   instance.show();
 
-  gallery.addEventListener("keydown", (evt) => {
-    if (evt.code === "Escape") {
+  gallery.addEventListener("keydown", (e) => {
+    if (e.target.nodeName === "Escape") {
       instance.close();
     }
   });
-}
-
-function preventDefaultAction(evt) {
-  evt.preventDefault();
 }
